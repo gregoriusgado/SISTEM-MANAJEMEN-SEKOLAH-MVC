@@ -1,0 +1,19 @@
+ :root {
+    --primary:      #00586e;
+    --primary-dark: #003f50;
+    --primary-light:#e0f4f7;
+    --accent:       #EAA043;
+    --accent-dark:  #d4892e;
+    --error:        #e53935;
+    --error-bg:     #fff0f0;
+    --text-dark:    #1a2e35;
+    --text-mid:     #4a6572;
+    --text-light:   #8da5ae;
+    --border:       #ccdde2;
+    --bg:           #f0f6f8;
+    --white:        #ffffff;
+}
+body {
+    background-color: var(--text-light);
+} 
+ 
