@@ -9,6 +9,7 @@
 
     <a href="/?url=/siswa/daftarSiswa">daftar siswa</a>
     <a href="/?url=/guru/daftarGuru">daftar guru</a>
+    <a href="/?url=/staff/daftarStaff">daftar staff</a>
     
 </body>
 </html>

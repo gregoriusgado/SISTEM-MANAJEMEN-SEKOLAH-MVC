@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Guru</title>
-    <link rel="stylesheet" href="css/daftarGuru.css">
+    <title>Data Staff</title>
+    <link rel="stylesheet" href="css/daftarStaff.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <a href="#" class="navbar-brand">
-            Data Guru
+            Data Staff
         </a>
         <div class="navbar-actions">
             <a href="#" class="btn btn-outline">
@@ -23,8 +23,8 @@
     
                 Export Data
             </a>
-            <a href="/?url=/guru/createDataGuru" class="btn btn-success">
-                Tambah Guru
+            <a href="/?url=/staff/createDataStaff" class="btn btn-success">
+                Tambah Staff
             </a>
         </div>
     </nav>
@@ -47,11 +47,11 @@
                 <label>Jabatan</label>
                 <select name="jabatan">
                     <option value="">Jabatan</option>
-                    <option value="Kepala Sekolah">Kepala Sekolah</option>
-                    <option value="Wakil">Wakil Kepala</option>
-                    <option value="Wali Kelas">Wali Kelas</option>
-                    <option value="Reguler">Guru Reguler</option>
-                    <option value="BK">BK</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Operator">Operator</option>
+                    <option value="Keuangan">Keuangan</option>
+                    <option value="Tata Usaha">Tata Usaha</option>
+                    <option value="Security">Security</option>
                 </select>
             </div>
 
@@ -89,24 +89,24 @@
                 </thead>
                 <tbody>
 
-                    <?php if (!empty($guru)): ?>
-                        <?php foreach ($guru as $g): ?>
+                    <?php if (!empty($staff)): ?>
+                        <?php foreach ($staff as $s): ?>
 
                             <?php
                             // Ambil inisial untuk placeholder foto
-                            $namaParts = explode(' ', trim($g['nama']));
+                            $namaParts = explode(' ', trim($s['nama']));
                             $inisial = strtoupper(substr($namaParts[0], 0, 1));
 
                             if (isset($namaParts[1])) $inisial .= strtoupper(substr($namaParts[1], 0, 1));
-                            $isAktif = strtolower($g['status']) === 'aktif';
+                            $isAktif = strtolower($s['status']) === 'aktif';
                             ?>
 
                             <tr>
                                 <!-- FOTO -->
                                 <td class="foto-col">
-                                    <?php if (!empty($g['foto'])): ?>
-                                        <img src="/uploads/guru/<?= htmlspecialchars($g['foto']) ?>"
-                                            alt="Foto <?= htmlspecialchars(strtoupper($g['nama']) )?>"class="foto-guru">
+                                    <?php if (!empty($s['foto'])): ?>
+                                        <img src="/uploads/staff/<?= htmlspecialchars($s['foto']) ?>"
+                                            alt="Foto <?= htmlspecialchars(strtoupper($s['nama']) )?>"class="foto-staff">
                                     <?php else: ?>
                                         <span class="foto-placeholder"><?= $inisial ?></span>
                                     <?php endif; ?>
@@ -114,15 +114,15 @@
 
                                 <!-- NAMA -->
                                 <td>
-                                    <div class="nama-guru"><?= htmlspecialchars(strtoupper($g['nama'])) ?></div>
-                                    <div class="nis-text"><?= htmlspecialchars($g['jenis_kelamin']) ?></div>
+                                    <div class="nama-staff"><?= htmlspecialchars(strtoupper($s['nama'])) ?></div>
+                                    <div class="nis-text"><?= htmlspecialchars($s['jenis_kelamin']) ?></div>
                                 </td>
 
                                 <!-- NIS -->
-                                <td><?= htmlspecialchars($g['nip']) ?></td>
+                                <td><?= htmlspecialchars($s['nip']) ?></td>
 
                                 <!-- KELAS -->
-                                <td><?= htmlspecialchars($g['jabatan']) ?></td>
+                                <td><?= htmlspecialchars($s['jabatan']) ?></td>
 
 
                                 <!-- STATUS -->
@@ -135,13 +135,13 @@
                                 <!-- AKSI -->
                                 <td>
                                     <div class="aksi-col">
-                                        <a href="/?url=/guru/editDataGuru&id=<?= $g['id'] ?>"
+                                        <a href="/?url=/staff/editDataStaff&id=<?= $s['id'] ?>"
                                             class="btn btn-primary btn-sm">
                                             Edit
                                         </a>
-                                        <a href="/?url=/guru/deleteDataGuru&id=<?= $g['id'] ?>"
+                                        <a href="/?url=/staff/deleteDataStaff&id=<?= $s['id'] ?>"
                                             class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin hapus data guru ini?')">
+                                            onclick="return confirm('Yakin hapus staff ini?')">
                                             Hapus
                                         </a>
                                     </div>
@@ -152,7 +152,7 @@
 
                     <?php else: ?>
                         <tr class="empty-row">
-                            <td colspan="9">Belum ada data guru.</td>
+                            <td colspan="9">Belum ada data staff.</td>
                         </tr>
                     <?php endif; ?>
 
@@ -162,8 +162,8 @@
             <!-- FOOTER / PAGINATION -->
             <div class="table-footer">
                 <span class="pagination-info">
-                    <?php if (!empty($guru)): ?>
-                        Menampilkan <?= count($guru) ?> data
+                    <?php if (!empty($staff)): ?>
+                        Menampilkan <?= count($staff) ?> data
                     <?php endif; ?>
                 </span>
 

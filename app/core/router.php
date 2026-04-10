@@ -23,7 +23,15 @@ $routes = [
     '/guru/storeDataGuru' => ['guruController', 'methodStoreDataGuru'],
     '/guru/editDataGuru' => ['guruController', 'methodEditDataGuru'],
     '/guru/updateDataGuru' => ['guruController', 'methodUpdateDataGuru'],
-    '/guru/deleteDataGuru' => ['guruController', 'methodDeleteDataGuru']
+    '/guru/deleteDataGuru' => ['guruController', 'methodDeleteDataGuru'],
+
+    // router staff
+    '/staff/daftarStaff' => ['staffController', 'daftarStaff'],
+    '/staff/createDataStaff' => ['staffController','methodCreateDataStaff'],
+    '/staff/storeDataStaff' => ['staffController', 'methodStoreDataStaff'],
+    '/staff/editDataStaff' => ['staffController', 'methodEditDataStaff'],
+    '/staff/updateDataStaff' => ['staffController', 'methodUpdateDataStaff'],
+    '/staff/deleteDataStaff' => ['staffController', 'methodDeleteDataStaff'],
 
 ];
 

@@ -54,11 +54,6 @@ class guruController
     }
 
 
-
-
-
-
-
     public function methodDeleteDataGuru()
     {
         $id = $_GET['id'] ?? 0;
