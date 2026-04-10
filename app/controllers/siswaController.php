@@ -13,10 +13,10 @@ class siswaController
         $this->service = new siswaService();
     }
 
-    public function index()
+    public function daftarSiswa()
     {
         $siswa = $this->service->getAllSiswa();
-        require "../app/adminViews/siswa/index.php";
+        require "../app/adminViews/siswa/daftarSiswa.php";
     }
 
     public function methodCreateDataSiswa()

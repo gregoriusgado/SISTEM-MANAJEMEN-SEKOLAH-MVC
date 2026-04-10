@@ -1,19 +1,172 @@
- :root {
-    --primary:      #00586e;
-    --primary-dark: #003f50;
-    --primary-light:#e0f4f7;
-    --accent:       #EAA043;
-    --accent-dark:  #d4892e;
-    --error:        #e53935;
-    --error-bg:     #fff0f0;
-    --text-dark:    #1a2e35;
-    --text-mid:     #4a6572;
-    --text-light:   #8da5ae;
-    --border:       #ccdde2;
-    --bg:           #f0f6f8;
-    --white:        #ffffff;
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 body {
-    background-color: var(--text-light);
-} 
- 
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: #1e3a6e;
+    padding: 0 24px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ===== WRAPPER ===== */
+.wrapper {
+    max-width: 680px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+
+/* ===== JUDUL HALAMAN ===== */
+h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: #1e3a6e;
+}
+
+/* ===== FORM CARD ===== */
+form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== FORM GROUP ===== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+/* ===== LABEL ===== */
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+/* ===== INPUT ===== */
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #111827;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #1e3a6e;
+    box-shadow: 0 0 0 3px rgba(30, 58, 110, 0.1);
+}
+
+input::placeholder {
+    color: #9ca3af;
+}
+input {
+    text-transform: uppercase;
+}
+
+/* ===== SELECT ===== */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+/* ===== 2 KOLOM (untuk field pendek) ===== */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* ===== DIVIDER ===== */
+.form-divider {
+    border: none;
+    border-top: 1px solid #f1f5f9;
+    margin: 24px 0;
+}
+
+/* ===== FORM ACTIONS ===== */
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn:hover { opacity: 0.88; }
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+    background: #1e3a6e;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    color: #374151;
+    border: 1px solid #e2e8f0;
+}
