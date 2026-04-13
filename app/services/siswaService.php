@@ -107,4 +107,9 @@ class siswaService
             throw new Exception("Nama minimal 3 karakter", 1);
         }
     }
+    
+    public function siswaBulanan() {
+          return $this->siswaModel->siswaBulanan();
+            return $result['total'];
+    }
 }

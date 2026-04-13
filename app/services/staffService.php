@@ -101,4 +101,9 @@ class staffService
             throw new Exception("Nama minimal 3 karakter", 1);
         }
     }
+
+     public function staffBulanan() {
+          return $this->staffModel->staffBulanan();
+            return $result['total'];
+    }
 }

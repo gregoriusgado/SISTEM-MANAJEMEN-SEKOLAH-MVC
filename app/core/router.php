@@ -33,6 +33,9 @@ $routes = [
     '/staff/updateDataStaff' => ['staffController', 'methodUpdateDataStaff'],
     '/staff/deleteDataStaff' => ['staffController', 'methodDeleteDataStaff'],
 
+    // router kelas
+     '/daftarKelas' => ['kelasController', 'daftarKelas'],
+
 ];
 
     if(!isset($routes[$url])) {

@@ -101,4 +101,9 @@ class guruService
             throw new Exception("Nama minimal 3 karakter", 1);
         }
     }
+
+     public function guruBulanan() {
+          return $this->guruModel->guruBulanan();
+            return $result['total'];
+    }
 }

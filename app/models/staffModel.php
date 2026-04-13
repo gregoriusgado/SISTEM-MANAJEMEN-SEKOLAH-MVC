@@ -66,5 +66,15 @@ class staffModel
     $stmt = $this->conn->prepare("DELETE FROM staff WHERE id = ?");
     return $stmt->execute([$id]);
   }
+  // fungsi untuk update tambahan staff
+   public function staffBulanan()
+  {
+
+  $stmt = $this->conn->query("SELECT COUNT(*) as total
+  FROM staff
+  WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
+  $stmt->execute();
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
 
 }

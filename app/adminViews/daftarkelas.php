@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin SMP RIA BAHAGIA 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/daftarKelas.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- mainn -->
+    <div class="stats-grid">
+        <?php if (empty($kelas)): ?>
+            <p class="empty-state">Belum ada kelas. Tambahkan kelas baru.</p>
+        <?php else: ?>
+            <?php foreach ($kelas as $item): ?>
+                <div class="stat-card">
+                    <div class="kelas-badge"><?= htmlspecialchars($item['tingkat']) ?></div>
+                    <h3 class="kelas-nama"><?= htmlspecialchars($item['nama_kelas']) ?></h3>
+                    <p class="kelas-wali">👨‍🏫 Wali Kelas : 
+                        <?= $item['wali_kelas'] ? htmlspecialchars(ucwords($item['wali_kelas'])) : '<span class="kosong">Belum ada wali kelas</span>' ?>
+                    </p>
+                    <div class="kelas-footer">
+                        <span><?= $item['kapasitas'] ?> siswa</span>
+                        <a href="/kelas/detail?id=<?= $item['id'] ?>">Detail →</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+</div>
+</div>
+
+
+
+
+
+
+
+</body>

@@ -67,4 +67,15 @@ class GuruModel
     return $stmt->execute([$id]);
   }
 
+   //update jumlah bulanan
+  public function guruBulanan()
+  {
+
+  $stmt = $this->conn->query("SELECT COUNT(*) as total
+  FROM guru
+  WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
+  $stmt->execute();
+  return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
 }
