@@ -21,8 +21,12 @@ class kelasModel
             FROM kelas k
             LEFT JOIN guru g ON k.wali_kelas_id = g.id and  g.jabatan = 'guru reguler'
             ORDER BY k.tingkat, k.nama_kelas");
-            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+          return [
+        'tingkat' => $tingkat,
+        'kelas' => $kelas
+    ];
     }
 
     public function kelasBulanan()
@@ -35,4 +39,65 @@ class kelasModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+
+      // FUNGSI UNTUK MEMBUAT DATA kelas
+    public function createKelas(
+        $nama_kelas,
+        $tingkat,
+        $wali_kelas_id,
+        $kapasitas,
+        $tahun_ajaran
+    ) {
+        $stmt = $this->conn->prepare("
+        INSERT INTO kelas (nama_kelas,tingkat,wali_kelas_id,kapasitas,tahun_ajaran)
+        VALUES (?,?,?,?,?)
+    ");
+        return $stmt->execute([
+            $nama_kelas,
+            $tingkat,
+            $wali_kelas_id,
+            $kapasitas,
+            $tahun_ajaran
+            
+
+        ]);
+    } 
+        
+    // FIND ID UNTUK MENAMPILKAN DATA KELAS YANG AKAN DI-UPDATE
+    public function modelFindKelas($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM kelas WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    // FUNGSI UNTUK MENGUPDATE DATA KELAS
+    public function modelUpdateDataKelas(
+        $id,
+        $nama_kelas,
+        $tingkat,
+        $wali_kelas_id,
+        $kapasitas,
+        $tahun_ajaran
+    ) {
+        $stmt = $this->conn->prepare("
+        UPDATE kelas SET nama_kelas = ?, tingkat = ?, wali_kelas_id = ?, kapasitas = ?,
+        tahun_ajaran = ? WHERE id = ?
+    ");
+        return $stmt->execute([
+            $nama_kelas,
+            $tingkat,
+            $wali_kelas_id,
+            $kapasitas,
+            $tahun_ajaran,
+            $id
+
+        ]);
+    }
+
+    // FUNGSI UNTUK MENGHAPUS DATA Guru
+  public function modelDeleteDataKelas($id)
+  {
+    $stmt = $this->conn->prepare("DELETE FROM kelas WHERE id = ?");
+    return $stmt->execute([$id]);
+  }
 }

@@ -48,7 +48,7 @@ $current_url = $_GET['url'] ?? '/dashboard';
             <a href="/?url=/staff/daftarStaff" class="nav-item <?= $current_url === '/staff/daftarStaff' ? 'active' : '' ?>">
                 <span class="nav-icon">🗂</span> Daftar Staff
             </a>
-            <a href="/?url=/daftarKelas" class="nav-item <?= $current_url === '/dafarKelas' ? 'active' : '' ?>">
+            <a href="/?url=/kelas/daftarKelas" class="nav-item <?= $current_url === '/dafarKelas' ? 'active' : '' ?>">
                 <span class="nav-icon">🏫</span> Kelas
             </a>
 

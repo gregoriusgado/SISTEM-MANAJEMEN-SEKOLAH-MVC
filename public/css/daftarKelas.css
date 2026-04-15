@@ -1,64 +1,216 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ===== daftarKelas.css ===== */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
-  --bg: #cbdceb;
-  --surface: #6b83c6;
-  --card: #020f3a;
-  --border: #3c5cb0;
-  --accent: #40e9e0;
-  --accent2: #ffc14f;
-  --blue: #08707e;
-  --red: #e05252;
-  --text: #e8eaf0;
-  --muted: #b6d6dd;
-  --sidebar-w: 240px;
+    --bg:         #f0f4f8;
+    --surface:    #ffffff;
+    --primary:    #1a3a5c;
+    --accent:     #e8a020;
+    --danger:     #d94f4f;
+    --success:    #2e9e6b;
+    --text:       #1e2a38;
+    --muted:      #6b7a8d;
+    --border:     #d8e2ec;
+    --radius:     14px;
+    --shadow:     0 4px 20px rgba(26, 58, 92, 0.08);
+    --shadow-hover: 0 10px 36px rgba(26, 58, 92, 0.16);
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 32px;
 }
 
+/* ===== GRID ===== */
 
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Tombol tambah: ambil lebar penuh satu baris */
+.stats-grid > .btn-success {
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+
+/* ===== CARD ===== */
+
 .stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin: 20px;
-  padding: 24px 20px 18px;
-  position: relative;
-  overflow: hidden;
-  transition:
-  ransform 0.2s,
-  border-color 0.2s;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform .25s ease, box-shadow .25s ease;
+    position: relative;
+    overflow: hidden;
 }
+
 .stat-card::before {
-  content: "";
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  opacity: 0.9;
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
 }
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Badge tingkat (VII / VIII / IX) */
+.kelas-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    align-self: flex-start;
+}
+
+/* Nama kelas */
+.kelas-nama {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+/* Wali kelas */
 .kelas-wali {
-  color: #40e9e0;
-  
+    font-size: .9rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.kelas-wali .kosong {
+    color: var(--danger);
+    font-style: italic;
+    font-size: .85rem;
+}
+
+/* Footer: kapasitas & link detail */
+.kelas-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+.kelas-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.kelas-footer a:hover {
+    color: var(--accent);
+}
+
+/* Aksi: edit & hapus */
+.aksi_col {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: filter .2s, transform .15s;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    filter: brightness(.95);
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: .8rem;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-success {
+    background: var(--success);
+    color: #fff;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+/* ===== EMPTY STATE ===== */
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 2px dashed var(--border);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+    body {
+        padding: 24px 16px;
+    }
+
+    .kelas-nama {
+        font-size: 1.2rem;
+    }
 }

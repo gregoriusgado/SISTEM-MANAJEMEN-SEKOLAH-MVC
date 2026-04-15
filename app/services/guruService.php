@@ -106,4 +106,8 @@ class guruService
           return $this->guruModel->guruBulanan();
             return $result['total'];
     }
+    
+    public function guruReguler() {
+         return $this->guruModel->guruReguler();
+    }
 }

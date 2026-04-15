@@ -78,6 +78,7 @@ label {
 /* ===== INPUT ===== */
 input[type="text"],
 input[type="date"],
+input[type = "number"],
 input[type="tel"],
 select,
 textarea {

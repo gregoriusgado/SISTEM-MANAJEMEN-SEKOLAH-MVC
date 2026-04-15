@@ -13,21 +13,40 @@
 </head>
 
 <body>
+
     <!-- mainn -->
+
+      
     <div class="stats-grid">
         <?php if (empty($kelas)): ?>
             <p class="empty-state">Belum ada kelas. Tambahkan kelas baru.</p>
         <?php else: ?>
+           
+               <a href="/?url=/kelas/createDataKelas" class="btn btn-success">
+                Tambah Kelas
+            </a>
+
             <?php foreach ($kelas as $item): ?>
                 <div class="stat-card">
                     <div class="kelas-badge"><?= htmlspecialchars($item['tingkat']) ?></div>
-                    <h3 class="kelas-nama"><?= htmlspecialchars($item['nama_kelas']) ?></h3>
-                    <p class="kelas-wali">👨‍🏫 Wali Kelas : 
+                    <h3 class="kelas-nama"><?= strtoupper(htmlspecialchars($item['nama_kelas'])) ?></h3>
+                    <p class="kelas-wali">👨‍🏫 Wali Kelas :
                         <?= $item['wali_kelas'] ? htmlspecialchars(ucwords($item['wali_kelas'])) : '<span class="kosong">Belum ada wali kelas</span>' ?>
                     </p>
                     <div class="kelas-footer">
                         <span><?= $item['kapasitas'] ?> siswa</span>
                         <a href="/kelas/detail?id=<?= $item['id'] ?>">Detail →</a>
+                    </div>
+                    <div class="aksi_col">
+                        <a href="/?url=/kelas/editDataKelas&id=<?= $item['id'] ?>"
+                            class="btn btn-primary btn-sm">
+                            Edit
+                        </a>
+                        <a href="/?url=/kelas/hapusDataKelas&id=<?= $item['id'] ?>"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Yakin hapus kelas ini?')">
+                            Hapus
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>

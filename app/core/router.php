@@ -34,7 +34,13 @@ $routes = [
     '/staff/deleteDataStaff' => ['staffController', 'methodDeleteDataStaff'],
 
     // router kelas
-     '/daftarKelas' => ['kelasController', 'daftarKelas'],
+     '/kelas/daftarKelas' => ['kelasController', 'daftarKelas'],
+     '/kelas/createDataKelas' => ['kelasController', 'methodCreateDaftarKelas'],
+     '/kelas/storeDataKelas' => ['kelasController', 'methodStoreDataKelas'],
+     '/kelas/editDataKelas' => ['kelasController', 'methodEditDataKelas'],
+     '/kelas/updateDataKelas' => ['kelasController', 'methodUpdateDataKelas'],
+     '/kelas/hapusDataKelas' => ['kelascontroller', 'methodDeleteDataKelas']
+
 
 ];
 

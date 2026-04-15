@@ -78,4 +78,12 @@ class GuruModel
   return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function guruReguler() {
+     $stmt = $this->conn->query("
+        SELECT id, nama FROM guru
+        WHERE jabatan = 'guru reguler'
+        ORDER BY nama ASC
+    ");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
