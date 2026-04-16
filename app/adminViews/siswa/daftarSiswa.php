@@ -84,7 +84,6 @@
                         <th>Foto</th>
                         <th>Nama</th>
                         <th>NIS</th>
-                        <th>Kelas</th>
                         <th>Alamat</th>
                         <th>Tgl Lahir</th>
                         <th>No HP</th>
@@ -119,15 +118,13 @@
 
                                 <!-- NAMA -->
                                 <td>
-                                    <div class="nama-siswa"><?= htmlspecialchars($s['nama']) ?></div>
+                                    <div class="nama-siswa"><?= htmlspecialchars (strtoupper($s['nama'])) ?></div>
                                     <div class="nis-text"><?= htmlspecialchars($s['jenis_kelamin']) ?></div>
                                 </td>
 
                                 <!-- NIS -->
                                 <td><?= htmlspecialchars($s['nis']) ?></td>
 
-                                <!-- KELAS -->
-                                <td><?= htmlspecialchars($s['kelas']) ?></td>
 
                                 <!-- ALAMAT -->
                                 <td><?= htmlspecialchars($s['alamat']) ?></td>

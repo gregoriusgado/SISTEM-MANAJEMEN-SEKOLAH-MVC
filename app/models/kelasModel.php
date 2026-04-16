@@ -23,10 +23,6 @@ class kelasModel
             ORDER BY k.tingkat, k.nama_kelas");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-          return [
-        'tingkat' => $tingkat,
-        'kelas' => $kelas
-    ];
     }
 
     public function kelasBulanan()
@@ -40,7 +36,7 @@ class kelasModel
     }
 
 
-      // FUNGSI UNTUK MEMBUAT DATA kelas
+    // FUNGSI UNTUK MEMBUAT DATA kelas
     public function createKelas(
         $nama_kelas,
         $tingkat,
@@ -58,18 +54,28 @@ class kelasModel
             $wali_kelas_id,
             $kapasitas,
             $tahun_ajaran
-            
+
 
         ]);
-    } 
-        
+    }
+
     // FIND ID UNTUK MENAMPILKAN DATA KELAS YANG AKAN DI-UPDATE
     public function modelFindKelas($id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM kelas WHERE id = ?");
+        $stmt = $this->conn->prepare(" SELECT 
+            k.id,
+            k.nama_kelas,
+            k.tingkat,
+            k.kapasitas,
+            k.tahun_ajaran,
+            g.nama AS wali_kelas FROM kelas k LEFT JOIN guru g ON k.wali_kelas_id = g.id WHERE k.id = ? ");
+
         $stmt->execute([$id]);
+
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
     // FUNGSI UNTUK MENGUPDATE DATA KELAS
     public function modelUpdateDataKelas(
         $id,
@@ -95,9 +101,16 @@ class kelasModel
     }
 
     // FUNGSI UNTUK MENGHAPUS DATA Guru
-  public function modelDeleteDataKelas($id)
-  {
-    $stmt = $this->conn->prepare("DELETE FROM kelas WHERE id = ?");
-    return $stmt->execute([$id]);
-  }
+    public function modelDeleteDataKelas($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM kelas WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
+    public function listKelas()
+    {
+        $stmt = $this->conn->prepare("SELECT id, nama_kelas FROM kelas");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -35,7 +35,7 @@
                     </p>
                     <div class="kelas-footer">
                         <span><?= $item['kapasitas'] ?> siswa</span>
-                        <a href="/kelas/detail?id=<?= $item['id'] ?>">Detail →</a>
+                      <a href="/?url=/kelas/detailKelas&id=<?= $item['id'] ?>">Detail →</a>
                     </div>
                     <div class="aksi_col">
                         <a href="/?url=/kelas/editDataKelas&id=<?= $item['id'] ?>"
