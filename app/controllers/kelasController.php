@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../services/kelasService.php';
 require_once __DIR__ . '/../services/guruService.php';
+require_once __DIR__ . '/../services/siswaService.php';
 
 class kelasController
 {
@@ -9,21 +10,24 @@ class kelasController
 
     private $kelasService;
     private $guruService;
+    private $siswaService;
 
 
     public function __construct()
     {
         $this->kelasService = new kelasService();
         $this->guruService = new guruService();
+        $this->siswaService = new siswaService();
     }
 
     public function daftarKelas()
     {
         $kelas = $this->kelasService->getAllKelas();
         require "../app/adminViews/kelas/daftarKelas.php";
+        
     }
     public function methodCreateDaftarKelas()
-    {   
+    {
         $guru_reguler = $this->guruService->guruReguler();
         require "../app/adminViews/kelas/createDataKelas.php";
     }
@@ -65,5 +69,18 @@ class kelasController
         $id = $_GET['id'] ?? 0;
 
         $result = $this->kelasService->deleteDataKelas($id);
+    }
+
+
+    public function detailKelas()
+    {
+        $id = $_GET['id'] ?? null;
+
+        
+        $kelas = $this->kelasService->getKelasById($id);
+        $siswa = $this->siswaService->getSiswaByKelas($id);
+        
+
+        require '../app/adminViews/kelas/detail.php';
     }
 }

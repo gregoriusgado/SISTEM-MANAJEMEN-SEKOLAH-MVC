@@ -1,39 +1,46 @@
 <?php
 
 require_once __DIR__ . '/../services/siswaService.php';
+require_once __DIR__ . '/../services/kelasService.php';
 
 
 class siswaController
 {
-    private $service;
+    private $siswaService;
+    private $kelasService;
 
 
     public function __construct()
     {
-        $this->service = new siswaService();
+        $this->siswaService = new siswaService();
+        $this->kelasService = new kelasService();
     }
 
     public function daftarSiswa()
     {
-        $siswa = $this->service->getAllSiswa();
+        $siswa = $this->siswaService->getAllSiswa();
         require "../app/adminViews/siswa/daftarSiswa.php";
     }
 
     public function methodCreateDataSiswa()
     {
+        $kelasList = $this->kelasService->listKelas();
         require "../app/adminViews/siswa/createDataSiswa.php";
     }
     public function editDataSiswa()
     {
         $id = $_GET['id'] ?? 0;
-        $siswa = $this->service->getSiswaById($id);
+
+        $siswa = $this->siswaService->getSiswaById($id);
+        $kelasList = $this->kelasService->listKelas();
+
         require "../app/adminViews/siswa/createDataSiswa.php";
     }
 
     public function updateDataSiswa()
     {
         try {
-            $this->service->methodUpdateDataSiswa($_POST);
+            $this->siswaService->methodUpdateDataSiswa($_POST);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -45,7 +52,7 @@ class siswaController
 
 
         try {
-            $this->service->methodCreateDataSiswa($_POST);
+            $this->siswaService->methodCreateDataSiswa($_POST);
             header("Location: /?url=/siswa/createDataSiswa");
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -53,15 +60,10 @@ class siswaController
     }
 
 
-
-
-
-
-
     public function methodDeleteDataSiswa()
     {
         $id = $_GET['id'] ?? 0;
 
-        $result = $this->service->methodDeleteDataSiswa($id);
+        $result = $this->siswaService->methodDeleteDataSiswa($id);
     }
 }

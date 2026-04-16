@@ -28,7 +28,7 @@ class siswaService
         $result = $this->siswaModel->modelCreateDataSiswa(
             $dataSiswa['nis'],
             $dataSiswa['nama'],
-            $dataSiswa['kelas'],
+            $dataSiswa['kelas_id'],
             $dataSiswa['jenis_kelamin'],
             $dataSiswa['alamat'],
             $dataSiswa['tanggal_lahir'],
@@ -63,13 +63,13 @@ class siswaService
             $dataSiswa['id'],
             $dataSiswa['nis'],
             $dataSiswa['nama'],
-            $dataSiswa['kelas'],
             $dataSiswa['jenis_kelamin'],
             $dataSiswa['alamat'],
             $dataSiswa['tanggal_lahir'],
             $dataSiswa['status'],
             $dataSiswa['no_hp'],
-            $dataSiswa['foto']
+            $dataSiswa['foto'],
+            $dataSiswa['kelas_id']
         );
 
         if ($result) {
@@ -110,6 +110,12 @@ class siswaService
     
     public function siswaBulanan() {
           return $this->siswaModel->siswaBulanan();
-            return $result['total'];
+           
+    }
+
+    public function getSiswaByKelas($kelas_id)
+    {
+   
+        return $this->siswaModel->getSiswaByKelas($kelas_id);
     }
 }

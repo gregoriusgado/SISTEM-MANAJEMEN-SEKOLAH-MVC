@@ -43,14 +43,13 @@ $isEdit = !empty($siswa);
 
                 <div class="form-group">
                     <label for="kelas">Kelas</label>
-                    <select id="kelas" name="kelas">
+                    <select name="kelas_id">
                         <option value="">-- Pilih Kelas --</option>
-                        <?php
-                        $kelasList = ['VII A', 'VII B', 'VIII A', 'VIII B', 'IX A', 'IX B', 'IX C'];
-                        foreach ($kelasList as $k):
-                            $selected = ($isEdit && $siswa['kelas'] === $k) ? 'selected' : '';
-                        ?>
-                            <option value="<?= $k ?>" <?= $selected ?>><?= $k ?></option>
+                        <?php foreach ($kelasList as $k): ?>
+                            <option value="<?= $k['id']; ?>"
+                                <?= strtoupper($isEdit && $siswa['kelas_id'] == $k['id']) ? 'selected' : ''; ?>>
+                                <?= strtoupper( $k['nama_kelas']); ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -99,7 +98,7 @@ $isEdit = !empty($siswa);
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                        <option value="aktif"    <?= ($isEdit && $siswa['status_siswa'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
+                        <option value="aktif" <?= ($isEdit && $siswa['status_siswa'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
                         <option value="nonaktif" <?= ($isEdit && $siswa['status_siswa'] === 'nonaktif') ? 'selected' : '' ?>>Non-Aktif</option>
                     </select>
                 </div>

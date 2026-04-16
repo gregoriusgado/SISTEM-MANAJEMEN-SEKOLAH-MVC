@@ -22,7 +22,7 @@ class siswaModel
   public function modelCreateDataSiswa(
     $nis,
     $nama,
-    $kelas,
+    $kelas_id,
     $jenis_kelamin,
     $alamat,
     $tanggal_lahir,
@@ -32,20 +32,20 @@ class siswaModel
   ) {
     $stmt = $this->conn->prepare("
         INSERT INTO siswa 
-        (nis, nama, kelas, jenis_kelamin, alamat, tanggal_lahir, status_siswa, no_hp, foto) 
+        (nis, nama, jenis_kelamin, alamat, tanggal_lahir, status_siswa, no_hp, foto, kelas_id) 
         VALUES (?,?,?,?,?,?,?,?,?)
     ");
 
     return $stmt->execute([
       $nis,
       $nama,
-      $kelas,
       $jenis_kelamin,
       $alamat,
       $tanggal_lahir,
       $status_siswa,
       $no_hp,
-      $foto
+      $foto,
+      $kelas_id,
     ]);
   }
 
@@ -62,29 +62,29 @@ class siswaModel
     $id,
     $nis,
     $nama,
-    $kelas,
     $jenis_kelamin,
     $alamat,
     $tanggal_lahir,
     $status_siswa,
     $no_hp,
-    $foto
+    $foto,
+    $kelas_id
   ) {
     $stmt = $this->conn->prepare("
-        UPDATE siswa SET nis = ?, nama = ?, kelas = ?, jenis_kelamin = ?, alamat = ?,
-        tanggal_lahir = ?,status_siswa = ?,no_hp = ?,foto = ?
+        UPDATE siswa SET nis = ?, nama = ?, jenis_kelamin = ?, alamat = ?,
+        tanggal_lahir = ?,status_siswa = ?,no_hp = ?,foto = ?, kelas_id = ?
         WHERE id = ?
     ");
     return $stmt->execute([
       $nis,
       $nama,
-      $kelas,
       $jenis_kelamin,
       $alamat,
       $tanggal_lahir,
       $status_siswa,
       $no_hp,
       $foto,
+      $kelas_id,
       $id
     ]);
   }
@@ -100,10 +100,25 @@ class siswaModel
   public function siswaBulanan()
   {
 
-  $stmt = $this->conn->query("SELECT COUNT(*) as total
+    $stmt = $this->conn->query("SELECT COUNT(*) as total
   FROM siswa
   WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
-  $stmt->execute();
-  return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+
+
+  public function getSiswaByKelas($kelas_id)
+  {
+    $stmt = $this->conn->prepare("
+        SELECT id, nama, nis
+        FROM siswa
+        WHERE kelas_id = ?
+    ");
+
+    $stmt->execute([$kelas_id]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

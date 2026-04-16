@@ -86,5 +86,11 @@ class kelasService
         }
     }
 
+
+    public function listKelas() {
+
+       return $this->kelasModel->listKelas();
+    }
+
     
 }

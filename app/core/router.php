@@ -35,11 +35,12 @@ $routes = [
 
     // router kelas
      '/kelas/daftarKelas' => ['kelasController', 'daftarKelas'],
+     '/kelas/detailKelas' => ['kelasController', 'detailKelas'],
      '/kelas/createDataKelas' => ['kelasController', 'methodCreateDaftarKelas'],
      '/kelas/storeDataKelas' => ['kelasController', 'methodStoreDataKelas'],
      '/kelas/editDataKelas' => ['kelasController', 'methodEditDataKelas'],
      '/kelas/updateDataKelas' => ['kelasController', 'methodUpdateDataKelas'],
-     '/kelas/hapusDataKelas' => ['kelascontroller', 'methodDeleteDataKelas']
+     '/kelas/hapusDataKelas' => ['kelasController', 'methodDeleteDataKelas']
 
 
 ];
