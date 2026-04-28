@@ -59,7 +59,7 @@ $isEdit = !empty($staff);
             <!-- Nama -->
             <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" placeholder="Nama lengkap siswa"
+                <input type="text" id="nama" name="nama" placeholder="Nama lengkap staff"
                     value="<?= $isEdit ? htmlspecialchars($staff['nama']) : '' ?>">
             </div>
 
@@ -78,7 +78,7 @@ $isEdit = !empty($staff);
                     <label for="status">Status</label>
                     <select id="status" name="status">
                         <option value="aktif"    <?= ($isEdit && $staff['status'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
-                        <option value="nonaktif" <?= ($isEdit && $staff['status'] === 'nonaktif') ? 'selected' : '' ?>>Non-Aktif</option>
+                        <option value="tidak aktif" <?= ($isEdit && $staff['status'] === 'tidak aktif') ? 'selected' : '' ?>>Non-Aktif</option>
                     </select>
                 </div>
             </div>

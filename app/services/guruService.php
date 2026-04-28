@@ -14,12 +14,13 @@ class guruService
         $this->guruModel = new guruModel();
     }
 
+    // FUNGSI UNTUK MENAMPILKAN SEMUA DATA GURU
     public function getAllGuru()
     {
         return $this->guruModel->getAllGuru();
     }
 
-
+    // FUNGSI UNTUK MEMBUAT DATA GURU BARU
     public function createDataGuru($dataGuru)
     {
 
@@ -45,13 +46,13 @@ class guruService
     }
 
 
-
+    // FUNGSI UNTUK MENAMPILKAN DATA GURU BERDASARKAN ID
     public function getGuruById($id)
     {
         return $this->guruModel->modelFindGuru($id);
     }
 
-
+    // FUNGSI UNTUK MEMPERBARUI DATA GURU BERDASARKAN ID
     public function updateDataGuru($dataGuru)
     {
         $this->validateDataGuru($dataGuru);
@@ -73,7 +74,8 @@ class guruService
             echo "Gagal Update Data";
         }
     }
-    // public function delete
+    
+    // FUNGSI UNTUK MENGHAPUS DATA GURU BERDASARKAN ID
     public function deleteDataGuru($id)
     {
         $id = intval($id);
@@ -91,6 +93,7 @@ class guruService
         }
     }
 
+    // FUNGSI UNTUK VALIDASI DATA GURU
     private function validateDataGuru($dataGuru)
     {
         if (empty($dataGuru['nama'])) {
@@ -102,11 +105,13 @@ class guruService
         }
     }
 
+    // FUNGSI UNTUK MENGHITUNG TOTAL GURU BULANAN
      public function guruBulanan() {
           return $this->guruModel->guruBulanan();
             return $result['total'];
     }
     
+    // FUNGSI UNTUK MENGHITUNG TOTAL GURU REGULER
     public function guruReguler() {
          return $this->guruModel->guruReguler();
     }

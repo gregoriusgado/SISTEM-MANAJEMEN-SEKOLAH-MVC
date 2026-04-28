@@ -11,18 +11,15 @@ class staffModel
     $this->conn = Database::getConnection();
   }
 
-  // GET ALL DATA staff
+  // FUNGSI UNTUK MENAMPILKAN SEMUA DATA STAFF
   public function getAllStaff()
   {
     $stmt = $this->conn->query("SELECT * FROM staff ");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-// FUNGSI UNTUK MEMBUAT DATA staff
-  public function modelCreateDataStaff(
-    $nip,$nama,$status,$jenis_kelamin,$jabatan,
-    $foto
-) 
+  // FUNGSI UNTUK MENAMBAHKAN DATA STAFF
+  public function modelCreateDataStaff ( $nip,$nama,$status,$jenis_kelamin,$jabatan, $foto) 
 {
     $stmt = $this->conn->prepare("
         INSERT INTO staff 
@@ -36,7 +33,7 @@ class staffModel
     ]);
 }
 
-// FIND ID UNTUK MENAMPILKAN DATA Staff YANG AKAN DI-UPDATE
+  // FUNGSI UNTUK MENAMPILKAN DATA STAFF BERDASARKAN ID
   public function modelFindStaff($id)
   {
     $stmt = $this->conn->prepare("SELECT * FROM staff WHERE id = ?");
@@ -44,7 +41,7 @@ class staffModel
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
-// FUNGSI UNTUK MENGUPDATE DATA Staff
+  // FUNGSI UNTUK MENGUPDATE DATA STAFF
   public function modelUpdateDataStaff(
     $id,$nip,$nama,$status,$jenis_kelamin,$jabatan,
     $foto) 
@@ -59,22 +56,23 @@ class staffModel
         $foto
     ]);
 }
-
-// FUNGSI UNTUK MENGHAPUS DATA Guru
+  // FUNGSI UNTUK MENGHAPUS DATA STAFF
   public function modelDeleteDataStaff($id)
   {
     $stmt = $this->conn->prepare("DELETE FROM staff WHERE id = ?");
     return $stmt->execute([$id]);
   }
-  // fungsi untuk update tambahan staff
+
+  // FUNGSI UNTUK MENGHITUNG JUMLAH STAFF BULANAN
    public function staffBulanan()
   {
 
-  $stmt = $this->conn->query("SELECT COUNT(*) as total
-  FROM staff
-  WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
-  $stmt->execute();
-  return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $this->conn->query("SELECT COUNT(*) as total
+    FROM staff
+    WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
+    
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
 }

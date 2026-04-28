@@ -13,30 +13,28 @@ class kelasModel
     {
         $this->conn = Database::getConnection();
     }
-    // GET ALL DATA kelas
+    
+    // FUNGSI UNTUK MENAMPILKAN SEMUA DATA KELAS
     public function getAllKelas()
     {
-        $stmt = $this->conn->query("SELECT k.id, k.nama_kelas, k.tingkat, k.kapasitas, k.tahun_ajaran,
-                   g.nama AS wali_kelas
-            FROM kelas k
-            LEFT JOIN guru g ON k.wali_kelas_id = g.id and  g.jabatan = 'guru reguler'
-            ORDER BY k.tingkat, k.nama_kelas");
+        $stmt = $this->conn->query("SELECT 
+            kelas.id,
+            kelas.nama_kelas,
+            kelas.tingkat,
+            kelas.kapasitas,
+            guru.nama AS wali_kelas,
+            COUNT(siswa.id) AS jumlah_siswa
+        FROM kelas
+        LEFT JOIN siswa ON siswa.kelas_id = kelas.id
+        LEFT JOIN guru ON guru.id = kelas.wali_kelas_id
+        GROUP BY kelas.id ORDER BY kelas.tingkat ASC ");
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function kelasBulanan()
-    {
-
-        $stmt = $this->conn->query("SELECT COUNT(*) as total
-        FROM kelas
-        WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 
 
-    // FUNGSI UNTUK MEMBUAT DATA kelas
+    // FUNGSI UNTUK MEMBUAT DATA KELAS
     public function createKelas(
         $nama_kelas,
         $tingkat,
@@ -68,6 +66,7 @@ class kelasModel
             k.tingkat,
             k.kapasitas,
             k.tahun_ajaran,
+            K.wali_kelas_id,
             g.nama AS wali_kelas FROM kelas k LEFT JOIN guru g ON k.wali_kelas_id = g.id WHERE k.id = ? ");
 
         $stmt->execute([$id]);
@@ -100,7 +99,7 @@ class kelasModel
         ]);
     }
 
-    // FUNGSI UNTUK MENGHAPUS DATA Guru
+    // FUNGSI UNTUK MENGHAPUS DATA KELAS
     public function modelDeleteDataKelas($id)
     {
         $stmt = $this->conn->prepare("DELETE FROM kelas WHERE id = ?");
@@ -112,5 +111,16 @@ class kelasModel
         $stmt = $this->conn->prepare("SELECT id, nama_kelas FROM kelas");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // FUNGSI UNTUK MENGHITUNG JUMLAH KELAS YANG DIBUAT DALAM SEBULAN TERAKHIR
+     public function kelasBulanan()
+    {
+
+        $stmt = $this->conn->query("SELECT COUNT(*) as total
+        FROM kelas
+        WHERE created_at >= DATE_FORMAT(CURDATE(), '%Y-%m-01'); ");
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

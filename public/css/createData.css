@@ -8,7 +8,7 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     font-size: 14px;
-    background: #f0f2f5;
+    background: #f0f4f8;
     color: #1a1a2e;
     min-height: 100vh;
 }
@@ -53,7 +53,7 @@ h1 span {
 
 /* ===== FORM CARD ===== */
 form {
-    background: #fff;
+    background: #3de2ca;
     border-radius: 12px;
     padding: 28px 32px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);

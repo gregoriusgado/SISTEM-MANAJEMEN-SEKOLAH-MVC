@@ -66,4 +66,22 @@ class siswaController
 
         $result = $this->siswaService->methodDeleteDataSiswa($id);
     }
+
+    public function filterSiswa()
+    {
+        $keyword = $_GET['keyword'] ?? '';
+        $kelas   = $_GET['kelas'] ?? '';
+        $status  = $_GET['status'] ?? '';
+
+        $siswa = $this->siswaService->getFilteredSiswa($keyword, $kelas, $status);
+
+        require_once "../app/adminViews/siswa/daftarSiswa.php";
+    }
+
+    public function jumlah_siswa_kelas()
+    {
+        $kelas = $this->siswaService->jumlah_siswa_kelas();
+        require '../app/adminViews/kelas/daftarkelas.php';
+        
+    }
 }

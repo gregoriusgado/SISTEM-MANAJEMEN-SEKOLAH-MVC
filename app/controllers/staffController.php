@@ -11,23 +11,28 @@ class staffController
         $this->service = new staffService();
     }
 
+        // FUNGSI UNTUK MENAMPILKAN SEMUA DATA STAFF
   public function daftarStaff()
   {
     $staff = $this->service->getAllStaff();
     require "../app/adminViews/staff/daftarStaff.php";
   }
 
+    // FUNGSI UNTUK MEMBUAT DATA STAFF
     public function methodCreateDataStaff()
     {
         require "../app/adminViews/staff/createDataStaff.php";
     }
  
+        // FUNGSI UNTUK MENAMPILKAN DATA STAFF BERDASARKAN ID
       public function methodEditDataStaff()
     {
         $id = $_GET['id'] ?? 0;
         $staff = $this->service->getStaffById($id);
         require "../app/adminViews/staff/createDataStaff.php";
     }
+
+    // FUNGSI UNTUK MENGUPDATE DATA STAFF
       public function methodUpdateDataStaff()
     {
         try {
@@ -36,6 +41,8 @@ class staffController
             echo "Error: " . $e->getMessage();
         }
     }
+
+    // FUNGSI UNTUK MENGHAPUS DATA STAFF
       public function methodStoreDataStaff()
     {
 
@@ -46,6 +53,8 @@ class staffController
             echo "Error: " . $e->getMessage();
         }
     }
+
+    // FUNGSI UNTUK MENGHAPUS DATA STAFF
      public function methodDeleteDataStaff()
     {
         $id = $_GET['id'] ?? 0;

@@ -42,14 +42,16 @@ $isEdit = !empty($guru);
                 </div>
 
                 <div class="form-group">
+                    <!-- dropdown jabatan -->
                     <label for="jabatan">Jabatan</label>
                     <select id="jabatan" name="jabatan">
                         <option value="">-- Pilih Jabatan --</option>
                         <?php
+                        // Daftar jabatan guru di sekolah
                         $jabatanList = ['Kepala Sekolah', 'Wakil Kepala Sekolah', 'BK', 'Guru Reguler'];
                         foreach ($jabatanList as $j):
-                            $selected = ($isEdit && $guru['jabatan'] === $j) ? 'selected' : '';
-                        ?>
+                            // dropdown otomatis terisi sesuai data daftar guru yang diedit
+                            $selected = ($isEdit && $guru['jabatan'] === $j) ? 'selected' : ''; ?>
                             <option value="<?= $j ?>" <?= $selected ?>><?= $j ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -77,7 +79,7 @@ $isEdit = !empty($guru);
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" name="status">
-                        <option value="aktif"    <?= ($isEdit && $guru['status'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
+                        <option value="aktif" <?= ($isEdit && $guru['status'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
                         <option value="nonaktif" <?= ($isEdit && $guru['status'] === 'nonaktif') ? 'selected' : '' ?>>Non-Aktif</option>
                     </select>
                 </div>

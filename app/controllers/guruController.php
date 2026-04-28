@@ -15,15 +15,20 @@ class guruController
         $this->service = new guruService();
     }
 
+    // FUNGSI UNTUK MENAMPILKAN SEMUA DATA GURU
     public function daftarGuru()
     {
         $guru = $this->service->getAllGuru();
         require "../app/adminViews/guru/daftarGuru.php";
     }
+
+    // FUNGSI UNTUK MEMBUAT DATA GURU BARU
       public function methodCreateDataGuru()
     {
         require "../app/adminViews/guru/createDataGuru.php";
     }
+
+    // FUNGSI UNTUK MENAMPILKAN DATA GURU BERDASARKAN ID
     public function methodEditDataGuru()
     {
         $id = $_GET['id'] ?? 0;
@@ -31,6 +36,7 @@ class guruController
         require "../app/adminViews/guru/createDataGuru.php";
     }
 
+    // FUNGSI UNTUK MEMPERBARUI DATA GURU BERDASARKAN ID
     public function methodUpdateDataGuru()
     {
         try {
@@ -41,9 +47,9 @@ class guruController
     }
 
 
+    // FUNGSI UNTUK MENYIMPAN DATA GURU BARU
     public function methodStoreDataGuru()
     {
-
 
         try {
             $this->service->createDataGuru($_POST);
@@ -53,7 +59,7 @@ class guruController
         }
     }
 
-
+    // FUNGSI UNTUK MENGHAPUS DATA GURU BERDASARKAN ID
     public function methodDeleteDataGuru()
     {
         $id = $_GET['id'] ?? 0;

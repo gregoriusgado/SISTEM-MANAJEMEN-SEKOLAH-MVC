@@ -14,12 +14,13 @@ class staffService
         $this->staffModel = new staffModel();
     }
 
+    // FUNGSI UNTUK MENAMPILKAN SEMUA DATA STAFF
     public function getAllStaff()
     {
         return $this->staffModel->getAllStaff();
     }
 
-
+    // FUNGSI UNTUK MEMBUAT DATA STAFF
     public function createDataStaff($dataStaff)
     {
 
@@ -45,13 +46,13 @@ class staffService
     }
 
 
-
+    // FUNGSI UNTUK MENAMPILKAN DATA STAFF BERDASARKAN ID
     public function getStaffById($id)
     {
         return $this->staffModel->modelFindStaff($id);
     }
 
-
+    // FUNGSI UNTUK MENGUPDATE DATA STAFF
     public function updateDataStaff($dataStaff)
     {
         $this->validateDataStaff($dataStaff);
@@ -73,7 +74,8 @@ class staffService
             echo "Gagal Update Data";
         }
     }
-    // public function delete
+
+    // FUNGSI UNTUK MENGHAPUS DATA STAFF
     public function deleteDataStaff($id)
     {
         $id = intval($id);
@@ -91,6 +93,7 @@ class staffService
         }
     }
 
+    // FUNGSI UNTUK VALIDASI DATA STAFF
     private function validateDataStaff($dataStaff)
     {
         if (empty($dataStaff['nama'])) {
@@ -102,8 +105,10 @@ class staffService
         }
     }
 
+    // FUNGSI UNTUK MENGHITUNG JUMLAH STAFF BULANAN
      public function staffBulanan() {
-          return $this->staffModel->staffBulanan();
-            return $result['total'];
+
+        return $this->staffModel->staffBulanan();
+    
     }
 }
