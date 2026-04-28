@@ -72,10 +72,9 @@ class siswaModel
   ) {
     $stmt = $this->conn->prepare("
         UPDATE siswa SET nis = ?, nama = ?, jenis_kelamin = ?, alamat = ?,
-        tanggal_lahir = ?,status_siswa = ?,no_hp = ?,foto = ?, kelas_id = ?
-        WHERE id = ?
-    ");
+        tanggal_lahir = ?, status_siswa = ?, no_hp = ?, foto = ?, kelas_id = ? WHERE id = ? ");
     return $stmt->execute([
+      $id,
       $nis,
       $nama,
       $jenis_kelamin,
@@ -84,8 +83,7 @@ class siswaModel
       $status_siswa,
       $no_hp,
       $foto,
-      $kelas_id,
-      $id
+      $kelas_id
     ]);
   }
 
@@ -108,7 +106,7 @@ class siswaModel
   }
 
 
-
+  
   public function getSiswaByKelas($kelas_id)
   {
     $stmt = $this->conn->prepare("
@@ -118,6 +116,50 @@ class siswaModel
     ");
 
     $stmt->execute([$kelas_id]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function jumlah_siswa_kelas()
+  {
+    $stmt = $this->conn->query(" SELECT kelas.nama_kelas, count(siswa.id) as jumlah_siswa
+    FROM kelas
+    LEFT JOIN siswa ON kelas.id = siswa.kelas_id
+    GROUP BY kelas.id, kelas.nama_kelas ");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  // fungsi filter 
+
+  public function getFilteredSiswa($keyword, $kelas, $status)
+  {
+    $sql = " SELECT siswa.*, kelas.nama_kelas FROM  siswa LEFT JOIN kelas ON siswa.kelas_id = kelas.id
+  WHERE 1=1 ";
+
+    $params = [];
+
+    if (!empty($keyword)) {
+      $sql .= " AND ( siswa.nama LIKE :keyword OR siswa.nis LIKE :keyword OR kelas.nama_kelas LIKE :keyword )";
+
+      $params[':keyword'] = "%$keyword%";
+    }
+
+    if (!empty($kelas)) {
+      $sql .=  " AND siswa.kelas_id = :kelas";
+      $params[':kelas'] = $kelas;
+    }
+
+    if (!empty($status)) {
+      $sql .= " AND siswa.status_siswa = :status";
+      $params[':status'] = $status;
+    }
+
+
+    $sql .= " ORDER BY siswa.nama ASC";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($params);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

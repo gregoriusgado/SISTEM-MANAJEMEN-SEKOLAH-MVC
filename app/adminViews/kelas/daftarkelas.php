@@ -14,18 +14,19 @@
 
 <body>
 
-    <!-- mainn -->
 
-      
+
+    <!-- Main -->
     <div class="stats-grid">
         <?php if (empty($kelas)): ?>
             <p class="empty-state">Belum ada kelas. Tambahkan kelas baru.</p>
         <?php else: ?>
-           
-               <a href="/?url=/kelas/createDataKelas" class="btn btn-success">
+
+            <a href="/?url=/kelas/createDataKelas" class="btn btn-success">
                 Tambah Kelas
             </a>
 
+            <!-- Render List Kelas -->
             <?php foreach ($kelas as $item): ?>
                 <div class="stat-card">
                     <div class="kelas-badge"><?= htmlspecialchars($item['tingkat']) ?></div>
@@ -34,8 +35,9 @@
                         <?= $item['wali_kelas'] ? htmlspecialchars(ucwords($item['wali_kelas'])) : '<span class="kosong">Belum ada wali kelas</span>' ?>
                     </p>
                     <div class="kelas-footer">
-                        <span><?= $item['kapasitas'] ?> siswa</span>
-                      <a href="/?url=/kelas/detailKelas&id=<?= $item['id'] ?>">Detail →</a>
+                        <span>Kapasitas: <?= $item['kapasitas'] ?> siswa</span>
+                        <span>Jumlah : <?= $item['jumlah_siswa'] ?> siswa</span>
+                        <a href="/?url=/kelas/detailKelas&id=<?= $item['id'] ?>">Detail →</a>
                     </div>
                     <div class="aksi_col">
                         <a href="/?url=/kelas/editDataKelas&id=<?= $item['id'] ?>"
@@ -52,7 +54,6 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
-
 
 
 

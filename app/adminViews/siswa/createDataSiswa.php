@@ -99,7 +99,7 @@ $isEdit = !empty($siswa);
                     <label for="status">Status</label>
                     <select id="status" name="status">
                         <option value="aktif" <?= ($isEdit && $siswa['status_siswa'] === 'aktif')    ? 'selected' : '' ?>>Aktif</option>
-                        <option value="nonaktif" <?= ($isEdit && $siswa['status_siswa'] === 'nonaktif') ? 'selected' : '' ?>>Non-Aktif</option>
+                        <option value="tidak aktif" <?= ($isEdit && $siswa['status_siswa'] === 'tidak aktif') ? 'selected' : '' ?>>Non-Aktif</option>
                     </select>
                 </div>
             </div>

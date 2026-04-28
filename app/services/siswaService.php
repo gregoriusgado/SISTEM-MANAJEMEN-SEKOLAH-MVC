@@ -60,7 +60,6 @@ class siswaService
         $this->validateDataSiswa($dataSiswa);
 
         $result = $this->siswaModel->modelUpdateDataSiswa(
-            $dataSiswa['id'],
             $dataSiswa['nis'],
             $dataSiswa['nama'],
             $dataSiswa['jenis_kelamin'],
@@ -69,7 +68,8 @@ class siswaService
             $dataSiswa['status'],
             $dataSiswa['no_hp'],
             $dataSiswa['foto'],
-            $dataSiswa['kelas_id']
+            $dataSiswa['kelas_id'],
+            $dataSiswa['id']
         );
 
         if ($result) {
@@ -107,15 +107,25 @@ class siswaService
             throw new Exception("Nama minimal 3 karakter", 1);
         }
     }
-    
-    public function siswaBulanan() {
-          return $this->siswaModel->siswaBulanan();
-           
+
+    public function siswaBulanan()
+    {
+        return $this->siswaModel->siswaBulanan();
     }
 
     public function getSiswaByKelas($kelas_id)
     {
-   
+
         return $this->siswaModel->getSiswaByKelas($kelas_id);
+    }
+
+    public function getFilteredSiswa($keyword, $kelas, $status)
+    {
+
+        return $this->siswaModel->getFilteredSiswa($keyword, $kelas, $status);
+    }
+    public function jumlah_siswa_kelas()
+    {
+        return $this->siswaModel->jumlah_siswa_kelas();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+// kondisi terjadinya edit data kelas adalah ketika variabel $kelas tidak kosong
 $isEdit = !empty($kelas);
 
 ?>
@@ -46,10 +46,10 @@ $isEdit = !empty($kelas);
                     <select id="wali_kelas_id" name="wali_kelas_id">
                         <option value="">-- Wali Kelas --</option>
                         <?php foreach ($guru_reguler as $w): ?>
+                            <!-- cek apakah ini wali kelas yang sedang diedit -->
                             <?php $selected = ($isEdit && $waliKelasSekarang  === $w['id']) ? 'selected' : ''; ?>
-
                             <option value="<?= $w['id'] ?>" <?= $selected ?>>
-                                <?= htmlspecialchars($w['nama']) ?>
+                                <?= htmlspecialchars(ucwords($w['nama'])) ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -58,14 +58,14 @@ $isEdit = !empty($kelas);
                 </div>
             </div>
 
-
+                            <!-- Tingkat -->
             <div class="form-group">
 
                 <label for="tingkat">Tingkat</label>
 
                 <select name="tingkat"> 
                     <option value="VII" <?= ($isEdit && $kelas['tingkat'] === 'VII')    ? 'selected' : '' ?>>VII</option>
-                    <option value="VII"  <?= ($isEdit && $kelas['tingkat'] === 'VIII')    ? 'selected' : '' ?>>VIII</option>
+                    <option value="VIII"  <?= ($isEdit && $kelas['tingkat'] === 'VIII')    ? 'selected' : '' ?>>VIII</option>
                     <option value="IX"  <?= ($isEdit && $kelas['tingkat'] === 'IX')    ? 'selected' : '' ?>>IX</option>
                 </select>
 
@@ -76,18 +76,19 @@ $isEdit = !empty($kelas);
                 </div>
             </div>
 
-            <!-- Foto -->
+            <!-- Tahun Ajaran -->
              <div class="form-group">
 
-                <label for="tahun_ajaran">Tingkat</label>
+                <label for="tahun_ajaran">Tahun Ajaran</label>
 
                 <select name="tahun_ajaran"> 
                     <option value="2024/2025" <?= ($isEdit && $kelas['tahun_ajaran'] === '2024/2025')    ? 'selected' : '' ?>>2024/2025</option>
-                    <option value="2025/2026"  <?= ($isEdit && $kelas['tingkat'] === 'VIII')    ? 'selected' : '' ?>>2025/2026</option>
+                    <option value="2025/2026"  <?= ($isEdit && $kelas['tahun_ajaran'] === '2025/2026')    ? 'selected' : '' ?>>2025/2026</option>
                 </select>
 
+            </div>
+            
             <hr class="form-divider">
-
             <!-- Tombol -->
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
