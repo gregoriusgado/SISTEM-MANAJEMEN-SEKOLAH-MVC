@@ -205,22 +205,34 @@
                 <div class="pagination">
                     <?php
                     $urlParams = $_GET;
-                    // Remove page param for base
+                    // Hapus parameter page untuk membangun URL pagination yang bersih
                     unset($urlParams['page']);
+                    // Ambil URL dasar tanpa query string
                     $baseUrl = strtok($_SERVER['REQUEST_URI'], '?');
-                    $queryString = function($p) use ($urlParams) {
-                        return http_build_query(array_merge($urlParams, ['page' => $p]));
+                    // Fungsi untuk membangun query string dengan parameter yang sudah ada ditambah page
+                    $queryString = function($page) use ($urlParams) {
+                        return http_build_query(array_merge($urlParams, ['page' => $page]));
                     };
                     ?>
-                    <?php if (($page ?? 1) > 1): ?>
+                    <?php
+                    // Tampilkan tombol previous jika tidak di halaman pertama
+                         if (($page ?? 1) > 1): ?>
                         <a href="<?= $baseUrl . '?' . $queryString(($page ?? 1) - 1) ?>" class="page-btn">&#8249;</a>
                     <?php endif; ?>
-                    <?php for ($i = 1; $i <= ($totalPages ?? 1); $i++): ?>
+
+                    <?php 
+                    // Tampilkan tombol nomor halaman
+                    for ($i = 1; $i <= ($totalPages ?? 1); $i++): ?>
                         <a href="<?= $baseUrl . '?' . $queryString($i) ?>" class="page-btn<?= ($page ?? 1) == $i ? ' active' : '' ?>"><?= $i ?></a>
                     <?php endfor; ?>
-                    <?php if (($page ?? 1) < ($totalPages ?? 1)): ?>
+
+                    <?php 
+                    // Tampilkan tombol next jika tidak di halaman terakhir
+                    if (($page ?? 1) < ($totalPages ?? 1)): ?>
                         <a href="<?= $baseUrl . '?' . $queryString(($page ?? 1) + 1) ?>" class="page-btn">&#8250;</a>
                     <?php endif; ?>
+
+
                 </div>
         </div>
     </div>
