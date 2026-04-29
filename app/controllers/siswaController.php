@@ -18,8 +18,20 @@ class siswaController
 
     public function daftarSiswa()
     {
-        $siswa = $this->siswaService->getAllSiswa();
-        require "../app/adminViews/siswa/daftarSiswa.php";
+           // Pagination
+           $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+           $limit = 10;
+           $offset = ($page - 1) * $limit;
+            // Filter
+           $keyword = $_GET['keyword'] ?? '';
+           $kelas = $_GET['kelas'] ?? '';
+           $status = $_GET['status'] ?? '';
+            // Get Data
+           $siswa = $this->siswaService->getPaginatedSiswa($limit, $offset, $keyword, $kelas, $status);
+           $totalSiswa = $this->siswaService->getSiswaCount($keyword, $kelas, $status);
+           $totalPages = ceil($totalSiswa / $limit);
+
+           require "../app/adminViews/siswa/daftarSiswa.php";
     }
 
     public function methodCreateDataSiswa()
@@ -67,16 +79,6 @@ class siswaController
         $result = $this->siswaService->methodDeleteDataSiswa($id);
     }
 
-    public function filterSiswa()
-    {
-        $keyword = $_GET['keyword'] ?? '';
-        $kelas   = $_GET['kelas'] ?? '';
-        $status  = $_GET['status'] ?? '';
-
-        $siswa = $this->siswaService->getFilteredSiswa($keyword, $kelas, $status);
-
-        require_once "../app/adminViews/siswa/daftarSiswa.php";
-    }
 
     public function jumlah_siswa_kelas()
     {

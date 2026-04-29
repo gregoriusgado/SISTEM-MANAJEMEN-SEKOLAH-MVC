@@ -13,13 +13,24 @@ class siswaService
     {
         $this->siswaModel = new siswaModel();
     }
-
+    // GET ALL DATA SISWA
     public function getAllSiswa()
     {
         return $this->siswaModel->getAllSiswa();
     }
 
+    // GET PAGINATED SISWA
+    public function getPaginatedSiswa($limit, $offset, $keyword = '', $kelas = '', $status = '')
+    {
+        return $this->siswaModel->getPaginatedSiswa($limit, $offset, $keyword, $kelas, $status);
+    }
 
+    public function getSiswaCount($keyword = '', $kelas = '', $status = '')
+    {
+        return $this->siswaModel->getSiswaCount($keyword, $kelas, $status);
+    }
+
+    // CREATE DATA SISWA
     public function methodCreateDataSiswa($dataSiswa)
     {
 
@@ -48,13 +59,13 @@ class siswaService
     }
 
 
-
+    // GET SISWA BY ID
     public function getSiswaById($id)
     {
         return $this->siswaModel->modelFindSiswa($id);
     }
 
-
+    // UPDATE DATA SISWA
     public function methodUpdateDataSiswa($dataSiswa)
     {
         $this->validateDataSiswa($dataSiswa);
@@ -79,7 +90,7 @@ class siswaService
             echo "Gagal Update Data";
         }
     }
-    // public function delete
+    // DELETE DATA SISWA
     public function methodDeleteDataSiswa($id)
     {
         $id = intval($id);
@@ -96,7 +107,7 @@ class siswaService
             echo "Gagal menghapus data";
         }
     }
-
+    // VALIDASI DATA SISWA
     private function validateDataSiswa($dataSiswa)
     {
         if (empty($dataSiswa['nama'])) {
@@ -107,23 +118,24 @@ class siswaService
             throw new Exception("Nama minimal 3 karakter", 1);
         }
     }
-
+    // FUNGSI UNTUK MENGHITUNG JUMLAH SISWA PER KELAS
     public function siswaBulanan()
     {
         return $this->siswaModel->siswaBulanan();
     }
-
+    // FUNGSI UNTUK MENDAPATKAN DATA SISWA BERDASARKAN KELAS
     public function getSiswaByKelas($kelas_id)
     {
 
         return $this->siswaModel->getSiswaByKelas($kelas_id);
     }
-
+    // FUNGSI UNTUK MENAMPILKAN HALAMAN DAFTAR SISWA
     public function getFilteredSiswa($keyword, $kelas, $status)
     {
 
         return $this->siswaModel->getFilteredSiswa($keyword, $kelas, $status);
     }
+    // FUNGSI UNTUK MENGHITUNG JUMLAH SISWA PER KELAS
     public function jumlah_siswa_kelas()
     {
         return $this->siswaModel->jumlah_siswa_kelas();

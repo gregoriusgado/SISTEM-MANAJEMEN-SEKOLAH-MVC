@@ -18,6 +18,62 @@ class siswaModel
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+    // GET PAGINATED SISWA
+    public function getPaginatedSiswa($limit, $offset, $keyword = '', $kelas = '', $status = '')
+    {
+      $sql = "SELECT siswa.*, kelas.nama_kelas FROM siswa LEFT JOIN kelas ON siswa.kelas_id = kelas.id WHERE 1=1 ";
+      $params = [];
+
+      if (!empty($keyword)) {
+        $sql .= " AND (siswa.nama LIKE :keyword OR siswa.nis LIKE :keyword OR kelas.nama_kelas LIKE :keyword)";
+        $params[':keyword'] = "%$keyword%";
+      }
+      if (!empty($kelas)) {
+        $sql .= " AND siswa.kelas_id = :kelas";
+        $params[':kelas'] = $kelas;
+      }
+      if (!empty($status)) {
+        $sql .= " AND siswa.status_siswa = :status";
+        $params[':status'] = $status;
+      }
+
+      $sql .= " ORDER BY siswa.nama ASC LIMIT :limit OFFSET :offset";
+      $stmt = $this->conn->prepare($sql);
+      foreach ($params as $key => $val) {
+        $stmt->bindValue($key, $val);
+      }
+      $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+      $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // GET SISWA COUNT FOR PAGINATION
+    public function getSiswaCount($keyword = '', $kelas = '', $status = '')
+    {
+      $sql = "SELECT COUNT(*) as total FROM siswa LEFT JOIN kelas ON siswa.kelas_id = kelas.id WHERE 1=1 ";
+      $params = [];
+      if (!empty($keyword)) {
+        $sql .= " AND (siswa.nama LIKE :keyword OR siswa.nis LIKE :keyword OR kelas.nama_kelas LIKE :keyword)";
+        $params[':keyword'] = "%$keyword%";
+      }
+      if (!empty($kelas)) {
+        $sql .= " AND siswa.kelas_id = :kelas";
+        $params[':kelas'] = $kelas;
+      }
+      if (!empty($status)) {
+        $sql .= " AND siswa.status_siswa = :status";
+        $params[':status'] = $status;
+      }
+      $stmt = $this->conn->prepare($sql);
+      foreach ($params as $key => $val) {
+        $stmt->bindValue($key, $val);
+      }
+      $stmt->execute();
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      return $row ? (int)$row['total'] : 0;
+    }
+
   // FUNGSI UNTUK MEMBUAT DATA SISWA
   public function modelCreateDataSiswa(
     $nis,

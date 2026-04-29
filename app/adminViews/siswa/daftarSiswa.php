@@ -33,8 +33,8 @@
     <div class="wrapper">
 
         <!-- FILTER BAR -->
-        <form method="GET" action="?url=/siswa/filterSiswa" class="filter-form">
-           <input type="hidden" name="url" value="/siswa/filterSiswa">
+        <form method="GET" action="?url=/siswa/daftarSiswa" class="filter-form">
+           <input type="hidden" name="url" value="/siswa/daftarSiswa">
             <div class="filter-bar">
                 <div class="search-box">
                     <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -197,18 +197,31 @@
         <!-- FOOTER / PAGINATION -->
         <div class="table-footer">
             <span class="pagination-info">
-                <?php if (!empty($siswa)): ?>
-                    Menampilkan <?= count($siswa) ?> data
-                <?php endif; ?>
+                    <?php if (!empty($siswa)): ?>
+                        Menampilkan <?= count($siswa) ?> dari <?= $totalSiswa ?? count($siswa) ?> data
+                    <?php endif; ?>
             </span>
 
-            <div class="pagination">
-                <a href="#" class="page-btn">&#8249;</a>
-                <a href="#" class="page-btn active">1</a>
-                <a href="#" class="page-btn">2</a>
-                <a href="#" class="page-btn">3</a>
-                <a href="#" class="page-btn">&#8250;</a>
-            </div>
+                <div class="pagination">
+                    <?php
+                    $urlParams = $_GET;
+                    // Remove page param for base
+                    unset($urlParams['page']);
+                    $baseUrl = strtok($_SERVER['REQUEST_URI'], '?');
+                    $queryString = function($p) use ($urlParams) {
+                        return http_build_query(array_merge($urlParams, ['page' => $p]));
+                    };
+                    ?>
+                    <?php if (($page ?? 1) > 1): ?>
+                        <a href="<?= $baseUrl . '?' . $queryString(($page ?? 1) - 1) ?>" class="page-btn">&#8249;</a>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= ($totalPages ?? 1); $i++): ?>
+                        <a href="<?= $baseUrl . '?' . $queryString($i) ?>" class="page-btn<?= ($page ?? 1) == $i ? ' active' : '' ?>"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <?php if (($page ?? 1) < ($totalPages ?? 1)): ?>
+                        <a href="<?= $baseUrl . '?' . $queryString(($page ?? 1) + 1) ?>" class="page-btn">&#8250;</a>
+                    <?php endif; ?>
+                </div>
         </div>
     </div>
 
