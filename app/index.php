@@ -1,13 +1,22 @@
 <?php
 $current_url = $_GET['url'] ?? '/dashboard';
+/** @var array $staff */
+/** @var array $guru */
+/** @var array $siswa */
+/** @var array $kelas */
+/** @var array $siswaBulanan */
+/** @var array $guruBulanan */
+/** @var array $staffBulanan */
+/** @var array $kelasBulanan */
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin SMP RIA BAHAGIA 2</title>
+    <title>Admin SMP BAHAGIA 2</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
@@ -17,7 +26,7 @@ $current_url = $_GET['url'] ?? '/dashboard';
     <!-- sidebar dashboard -->
     <aside class="sidebar">
         <div class="sidebar-logo">
-            <div class="nama-sekolah">SMP RIA BAHAGIA 2</div>
+            <div class="nama-sekolah">SMP BAHAGIA 2</div>
             <div class="sub-nama">Sistem Manajemen Sekolah</div>
         </div>
 
