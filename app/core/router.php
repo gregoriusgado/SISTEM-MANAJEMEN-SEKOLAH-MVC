@@ -16,7 +16,7 @@ $routes = [
     '/siswa/editDataSiswa' => ['siswaController', 'editDataSiswa'],
     '/siswa/updateDataSiswa' => ['siswaController', 'updateDataSiswa'],
     '/siswa/deleteDataSiswa' => ['siswaController', 'methodDeleteDataSiswa'],
-    '/siswa/filterSiswa' => ['siswaController', 'filterSiswa'],
+    // '/siswa/filterSiswa' => ['siswaController', 'filterSiswa'],
 
     // router guru
     '/guru/daftarGuru' => ['guruController', 'daftarGuru'],
